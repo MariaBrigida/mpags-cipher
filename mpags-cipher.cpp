@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <string>
-int main()
+int main(int argc, char*argv[])
 {
   std::string out{""};
   char in_char{'x'};
@@ -68,5 +68,25 @@ int main()
     std::cout << " " << "\n";
   }
   std::cout << "output string = " << out << "\n";
+
+  //check that main function correctly reads all input arguments
+  std::string iarg{""};
+  
+  for(int i{0}; i<argc; ++i){
+    std::cout << "argument n. " << i << " = " << argv[i] << "\n";
+    iarg=argv[i];
+    //check if there is a help flag between the arguments
+    if(iarg=="--help" || iarg=="-h") std::cout << "Help?" << "\n";
+	if(iarg=="--version") std::cout << "version 0.0.0.0.1\n";
+	if(iarg =="-o") {std::cout << "output file name = " << argv[i+1] << "\n";
+    ++i;
+    continue;
+	}
+        if(iarg=="-i") {std::cout << "input file name = " << argv[i+1] << "\n";
+    ++i;
+    continue;
+	}
+  }
+  
   return 0;
 }
