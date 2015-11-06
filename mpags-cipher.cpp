@@ -1,3 +1,16 @@
+/*
+Program for encryption and decryption of an input string shifting each character to the right by a user-specified number (in encrypting mode) or to the left (in decrypting mode).
+
+Standard usage:
+./mpags-cipher -i inputfilename -o outputfilename -e encryptionVariable(1=encrypt,0=decrypt) -s shift
+All characters in the string are converted to uppercase and numbers are written in letters before encryption/decryption.
+
+
+If no input and output file names are specified, the program asks for user input at runtime, and prints output string on screen.
+Default: encryptionVariable = 1 (encrypt), shift = 0.
+
+*/
+
 #include <iostream>
 #include <string>
 #include "transformChar.hpp"
@@ -20,24 +33,12 @@ int main(const int argc, const char*argv[])
     std::cout << "INVALID ARGUMENTS!" << "\n";
     return 1;
   }
-  /*
-  if (infileName == "")
-  {
-    std::cout << "Input file name absent" << "\n";
-    return 1;
-  }
-  if (outfileName == "")
-  {
-    std::cout << "Output file name absent" << "\n";
-    return 1;
-  }
-  */
   std::cout << "input file name = " << infileName << "\n";
   std::cout << "output file name = " << outfileName << "\n";
 
  ////////////////////////////////////////////////
  
- //Set cipher variables and encrypt/decrypt input file/string
+ //Declare and initialize cipher variables and encrypt/decrypt input file/string
   std::string out{""};    
   char in_char{'x'};
 
@@ -45,15 +46,17 @@ int main(const int argc, const char*argv[])
   else if(encvar==1) std::cout << "Cipher mode: encrypt\n";
   if(shift==0) std::cout << "Shift = 0\n";
   
-  //loop on input string characters
+  //loop on input string characters if input file name is not provided
   if(infileName==""){
   std::cout << "insert a string\n";
     while (std::cin >> in_char){
       std::cout << "in_char = " << in_char << "\n";
+      //converts the input character is the right format for the cipher
       out += transformChar(in_char);
       std::cout << " ";
     }
   }
+  //read from file if input file name is provided
   else {
     std::ifstream in_file(infileName);
     bool ok_to_read = in_file.good();
@@ -73,10 +76,11 @@ int main(const int argc, const char*argv[])
   std::cout << "\n";
   std::cout << "input string = " << out << "\n";
   for (unsigned int i = 0; i < out.size(); i++){
+    //Performs the encryption/decryption according to parameters specified by user
     out[i] = substituteChar(out[i], shift, encvar);
   }
   std::cout << "output string = " << out << "\n";
-  
+  //print to output file if output file name is provided
   if (outfileName!="") {
     std::ofstream out_file(outfileName);
     bool ok_to_write = out_file.good();

@@ -20,7 +20,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang")
 endif()
 
 # - Declare the build of mpags-cipher main program
-add_executable(mpags-cipher mpags-cipher.cpp MPAGSCipher/transformChar.cpp MPAGSCipher/transformChar.hpp)
+add_executable(mpags-cipher mpags-cipher.cpp MPAGSCipher/transformChar.cpp MPAGSCipher/transformChar.hpp MPAGSCipher/processCommandLine.cpp MPAGSCipher/processCommandLine.hpp MPAGSCipher/substituteChar.cpp MPAGSCipher/substituteChar.hpp)
 
 target_include_directories(mpags-cipher PRIVATE MPAGSCipher)
 
