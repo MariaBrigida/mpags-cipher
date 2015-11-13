@@ -11,7 +11,6 @@ bool processCommandLine(const int argc, const char *argv[], CommandLineInfo &inf
   info.inFileName="";
   info.outFileName="";
   info.cipherMode=CipherMode::decrypt;
-  info.shift=0;
 
   std::string iarg{""};
   std::string iargnext{""};
@@ -56,6 +55,19 @@ bool processCommandLine(const int argc, const char *argv[], CommandLineInfo &inf
           continue;
          }
         }
+      if(iarg=="-cipher")
+        {
+        if(i==argc) return false;
+        else {
+          info.cipherName = iargnext;
+          if(iargnext != "caesar" && iargnext != "playfair") {
+          std::cout << "Invalid cipher!\n";
+          return 0;
+          }
+          ++i;
+          continue;
+         }
+        }
       if(iarg=="-e")
         {
         if(i==argc) return false;
@@ -68,8 +80,9 @@ bool processCommandLine(const int argc, const char *argv[], CommandLineInfo &inf
         {
         if(i==argc) return false;
         else {
-          info.shift = std::stoi(iargnext);
-          info.shift = (unsigned int)info.shift;
+          //info.shift = std::stoi(iargnext);
+          info.shift = iargnext;
+          //info.shift = (unsigned int)info.shift;
           continue;
          }
         }

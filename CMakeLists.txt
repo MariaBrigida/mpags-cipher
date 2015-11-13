@@ -19,9 +19,27 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang")
   set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror -Wfatal-errors -Wshadow -pedantic")
 endif()
 
+# - Add the MPAGSCipher subdirectory to the build
+add_subdirectory(MPAGSCipher)
+
+# - Enable testing and add the Testing subdirectory to the build
+enable_testing()
+add_subdirectory(Testing)
+
 # - Declare the build of mpags-cipher main program
-add_executable(mpags-cipher mpags-cipher.cpp MPAGSCipher/transformChar.cpp MPAGSCipher/transformChar.hpp MPAGSCipher/processCommandLine.cpp MPAGSCipher/processCommandLine.hpp MPAGSCipher/CaesarCipher.cpp MPAGSCipher/CaesarCipher.hpp)
+add_executable(
+  mpags-cipher
+  mpags-cipher.cpp
+#  MPAGSCipher/transformChar.cpp
+#  MPAGSCipher/transformChar.hpp
+#  MPAGSCipher/processCommandLine.cpp
+#  MPAGSCipher/processCommandLine.hpp
+#  MPAGSCipher/CaesarCipher.cpp
+#  MPAGSCipher/CaesarCipher.hpp
+  )
 #add_executable(CaesarCipher CaesarCipher.cpp MPAGSCipher/transformChar.cpp MPAGSCipher/transformChar.hpp MPAGSCipher/processCommandLine.cpp MPAGSCipher/processCommandLine.hpp MPAGSCipher/CaesarCipher.cpp MPAGSCipher/CaesarCipher.hpp)
+
+target_link_libraries(mpags-cipher PRIVATE MPAGSCipher)
 
 target_include_directories(mpags-cipher PRIVATE MPAGSCipher)
 #target_include_directories(CaesarCipher PRIVATE MPAGSCipher)

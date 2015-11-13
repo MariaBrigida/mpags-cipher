@@ -1,6 +1,5 @@
 #ifndef MPAGSCIPHER_PROCESSCOMMANDLINE_HPP
 #define MPAGSCIPHER_PROCESSCOMMANDLINE_HPP
-//#include "CaesarCipher.hpp"
 #include <string>
 
 
@@ -11,11 +10,12 @@ enum class CipherMode {
 
 
 struct CommandLineInfo {
+  std::string cipherName{""};
   std::string inFileName{""};
   std::string outFileName{""};
   CipherMode cipherMode{CipherMode::encrypt};
   //CipherMode cipherMode;
-  unsigned int shift{0};
+  std::string shift{""};
   bool helpFlag=false;
 };
 

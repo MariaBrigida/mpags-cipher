@@ -17,6 +17,7 @@ Default: encryptionVariable = 1 (encrypt), shift = 0.
 //#include "substituteChar.hpp"
 #include "processCommandLine.hpp"
 #include "CaesarCipher.hpp"
+#include "PlayfairCipher.hpp"
 #include <fstream>
 
 int main(const int argc, const char*argv[])
@@ -29,7 +30,8 @@ int main(const int argc, const char*argv[])
   
   CommandLineInfo info;
   bool commandlineFlag = processCommandLine(argc, argv, info);
-  CaesarCipher myCipher(info.shift,info.cipherMode);
+  CaesarCipher myCipher((unsigned int)(std::stoi(info.shift)),info.cipherMode);
+  PlayfairCipher myPlayfairCipher(info.shift/*,info.cipherMode*/);
   //myCipher.setCipherMode(info.cipherMode);
 
   if(commandlineFlag == false)
@@ -39,7 +41,7 @@ int main(const int argc, const char*argv[])
   }
 
   if (info.helpFlag == true) return 0;
-  myCipher.setCipherMode(info.cipherMode);
+  if (info.cipherName=="caesar") myCipher.setCipherMode(info.cipherMode);
   std::cout << "input file name = " << info.inFileName << "\n";
   std::cout << "output file name = " << info.outFileName << "\n";
 
@@ -51,7 +53,7 @@ int main(const int argc, const char*argv[])
 
   if(info.cipherMode==CipherMode::decrypt) std::cout << "Cipher mode: decrypt\n";
   else if(info.cipherMode==CipherMode::encrypt) std::cout << "Cipher mode: encrypt\n";
-  if(info.shift==0) std::cout << "Shift = 0\n";
+  if(info.shift=="0") std::cout << "Shift = 0\n";
   
   //loop on input string characters if input file name is not provided
   if(info.inFileName==""){
@@ -89,7 +91,9 @@ int main(const int argc, const char*argv[])
     out[i] = substituteChar(out[i], info.shift, info.encvar);
   }
   */
-  out = myCipher.callProcessString(out);
+    if (info.cipherName=="caesar") out = myCipher.callProcessString(out);
+    //else out = myPlayfairCipher.callProcessString(out);
+    else myPlayfairCipher.encrypt();
   std::cout << "output string = " << out << "\n";
   //print to output file if output file name is provided
   if (info.outFileName!="") {
