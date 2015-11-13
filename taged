@@ -1,0 +1,35 @@
+[33mcommit 4e88917fae5822fa75f828397eb4865bf5218f9a[m
+Author: Maria Brigida <mbb@hep.ph.bham.ac.uk>
+Date:   Fri Oct 23 11:48:08 2015 +0100
+
+    added mpags-cipher.cpp
+
+[33mcommit a20fb2e69bcc52a8aed75a6856825e2fc832d034[m
+Author: Maria Brigida <mbb@hep.ph.bham.ac.uk>
+Date:   Fri Oct 23 11:45:36 2015 +0100
+
+    restored README
+
+[33mcommit 9d4b4ad6036020ef75adc75d9c4a93cf7a55a883[m
+Author: Maria Brigida <mbb@hep.ph.bham.ac.uk>
+Date:   Fri Oct 23 11:35:30 2015 +0100
+
+    further improvements in README
+
+[33mcommit fc79dc18e1cca2b4b8a83d1431bfc54f0943c944[m
+Author: Maria Brigida <mbb@hep.ph.bham.ac.uk>
+Date:   Fri Oct 23 11:27:31 2015 +0100
+
+    “Improve
+
+[33mcommit 8ddecb6ce4dac5ae295849fd67efef83bfd8caae[m
+Author: Ben Morgan <bmorgan.warwick@gmail.com>
+Date:   Tue Oct 13 13:00:13 2015 +0100
+
+    Tidy up README
+
+[33mcommit a46b253a1d101048095fa0db79d9f75529a1c04a[m
+Author: Ben Morgan <drbenmorgan@users.noreply.github.com>
+Date:   Tue Oct 13 12:58:27 2015 +0100
+
+    Initial commit

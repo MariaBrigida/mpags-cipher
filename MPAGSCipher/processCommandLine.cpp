@@ -1,16 +1,17 @@
 #include <string>
 #include <iostream>
 #include "processCommandLine.hpp"
+#include "CaesarCipher.hpp"
 
 //Reads and interprets a list of arguments. Used by main function mpags-cipher.cpp
 
-bool processCommandLine(const int argc, const char* argv[], std::string &inFile, std::string &outFile, bool &encvar, unsigned int &shift)
+bool processCommandLine(const int argc, const char *argv[], CommandLineInfo &info)
 {
   //Initialization
-  inFile="";
-  outFile="";
-  encvar=1;
-  shift=0;
+  info.inFileName="";
+  info.outFileName="";
+  info.cipherMode=CipherMode::decrypt;
+  info.shift=0;
 
   std::string iarg{""};
   std::string iargnext{""};
@@ -20,9 +21,11 @@ bool processCommandLine(const int argc, const char* argv[], std::string &inFile,
     //check if there is a help flag between the arguments
     if(iarg=="--help" || iarg=="-h") 
     {
+  
       std::cout << "Available options:\n-i inputfilename -o outputfilename -e encryptionVariable(1=encrypt,0=decrypt) -s shift\nDefault options: user input/output, encryptionVariable = 1 (encrypt), shift = 0\n";
       ++i;
-      continue;
+      info.helpFlag=true;
+      return true;
     }
     //prints version if required by one of the arguments
     if(iarg=="--version")
@@ -38,17 +41,17 @@ bool processCommandLine(const int argc, const char* argv[], std::string &inFile,
         {
         if(i==argc) return false;
         else {
-          inFile = iargnext;
+          info.inFileName = iargnext;
           ++i;
           continue;
          }
         }
       if(iarg=="-o")
         {
-        std::cout << "inFile = " << inFile << "\n";
+        //std::cout << "inFileName = " << InputArguments.inFileName << "\n";
         if(i==argc) return false;
         else {
-          outFile = iargnext;
+          info.outFileName = iargnext;
           ++i;
           continue;
          }
@@ -57,7 +60,7 @@ bool processCommandLine(const int argc, const char* argv[], std::string &inFile,
         {
         if(i==argc) return false;
         else {
-          encvar = std::stoi(iargnext);
+          info.cipherMode= CipherMode::encrypt;//std::stoi(iargnext);
           continue;
          }
         }
@@ -65,8 +68,8 @@ bool processCommandLine(const int argc, const char* argv[], std::string &inFile,
         {
         if(i==argc) return false;
         else {
-          shift = std::stoi(iargnext);
-          shift = (unsigned int)shift;
+          info.shift = std::stoi(iargnext);
+          info.shift = (unsigned int)info.shift;
           continue;
          }
         }

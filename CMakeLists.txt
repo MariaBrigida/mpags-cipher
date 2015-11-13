@@ -20,8 +20,11 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang")
 endif()
 
 # - Declare the build of mpags-cipher main program
-add_executable(mpags-cipher mpags-cipher.cpp MPAGSCipher/transformChar.cpp MPAGSCipher/transformChar.hpp MPAGSCipher/processCommandLine.cpp MPAGSCipher/processCommandLine.hpp MPAGSCipher/substituteChar.cpp MPAGSCipher/substituteChar.hpp)
+add_executable(mpags-cipher mpags-cipher.cpp MPAGSCipher/transformChar.cpp MPAGSCipher/transformChar.hpp MPAGSCipher/processCommandLine.cpp MPAGSCipher/processCommandLine.hpp MPAGSCipher/CaesarCipher.cpp MPAGSCipher/CaesarCipher.hpp)
+#add_executable(CaesarCipher CaesarCipher.cpp MPAGSCipher/transformChar.cpp MPAGSCipher/transformChar.hpp MPAGSCipher/processCommandLine.cpp MPAGSCipher/processCommandLine.hpp MPAGSCipher/CaesarCipher.cpp MPAGSCipher/CaesarCipher.hpp)
 
 target_include_directories(mpags-cipher PRIVATE MPAGSCipher)
+#target_include_directories(CaesarCipher PRIVATE MPAGSCipher)
 
 target_compile_features(mpags-cipher PRIVATE cxx_auto_type cxx_range_for cxx_uniform_initialization cxx_binary_literals)
+#target_compile_features(CaesarCipher PRIVATE cxx_auto_type cxx_range_for cxx_uniform_initialization cxx_binary_literals)

@@ -1,8 +1,24 @@
 #ifndef MPAGSCIPHER_PROCESSCOMMANDLINE_HPP
 #define MPAGSCIPHER_PROCESSCOMMANDLINE_HPP
-
+//#include "CaesarCipher.hpp"
 #include <string>
 
-bool processCommandLine(const int argc, const char *argv[], std::string &inFile, std::string &outFile, bool &encvar, unsigned int &shift);
+
+enum class CipherMode {
+  encrypt,
+  decrypt
+};
+
+
+struct CommandLineInfo {
+  std::string inFileName{""};
+  std::string outFileName{""};
+  CipherMode cipherMode{CipherMode::encrypt};
+  //CipherMode cipherMode;
+  unsigned int shift{0};
+  bool helpFlag=false;
+};
+
+bool processCommandLine(const int argc, const char* argv[], CommandLineInfo &info);
 
 #endif
